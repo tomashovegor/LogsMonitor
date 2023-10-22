@@ -2,7 +2,7 @@
 
 namespace LogsMonitor.Entities
 {
-    public class ErrorLog : EntityBase
+    public class Log : EntityBase
     {
         public string Number { get; set; } = null!;
         public string Message { get; set; } = null!;

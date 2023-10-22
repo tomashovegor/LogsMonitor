@@ -4,6 +4,6 @@ namespace LogsMonitor.Entities
 {
     public class Project : EntityBase
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
     }
 }
