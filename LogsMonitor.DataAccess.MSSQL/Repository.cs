@@ -22,9 +22,9 @@ namespace LogsMonitor.DataAccess.MSSQL
             return entity;
         }
 
-        public IEnumerable<T> GetAll()
+        public IQueryable<T> GetAll()
         {
-            IEnumerable<T> entities = _entitySet.AsNoTracking().AsEnumerable();
+            IQueryable<T> entities = _entitySet.AsNoTracking();
 
             return entities;
         }

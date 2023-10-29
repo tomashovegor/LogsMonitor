@@ -7,9 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogsMonitor", "LogsMonitor\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogsMonitor.Entities", "LogsMonitor.Entities\LogsMonitor.Entities.csproj", "{FA6290B1-6BCC-4503-BBDF-7719378C717B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogsMonitor.Infrastructure.Interfaces", "LogsMonitor.Infrastructure.Interfaces\LogsMonitor.Infrastructure.Interfaces.csproj", "{F1D04FB4-2CFE-4C88-AB6A-AF7A83BF53B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogsMonitor.Infrastructure.Interfaces", "LogsMonitor.Infrastructure.Interfaces\LogsMonitor.Infrastructure.Interfaces.csproj", "{F1D04FB4-2CFE-4C88-AB6A-AF7A83BF53B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogsMonitor.DataAccess.MSSQL", "LogsMonitor.DataAccess.MSSQL\LogsMonitor.DataAccess.MSSQL.csproj", "{CAEE4E80-BD32-49E2-B531-483246DC8BAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogsMonitor.DataAccess.MSSQL", "LogsMonitor.DataAccess.MSSQL\LogsMonitor.DataAccess.MSSQL.csproj", "{CAEE4E80-BD32-49E2-B531-483246DC8BAB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogsMonitor.Application", "LogsMonitor.Application\LogsMonitor.Application.csproj", "{CFB483E6-CE70-48C9-8137-D5D8BF4D507F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogMonitor.DomainServices.Interfaces", "LogMonitor.DomainServices.Interfaces\LogMonitor.DomainServices.Interfaces.csproj", "{3B98D342-9541-4E86-AF70-FB471CFF0FF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogMonitor.DomainServices.Implementation", "LogMonitor.DomainServices.Implementation\LogMonitor.DomainServices.Implementation.csproj", "{554575A2-2D9B-4F16-94A1-6B861CD40C74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,18 @@ Global
 		{CAEE4E80-BD32-49E2-B531-483246DC8BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAEE4E80-BD32-49E2-B531-483246DC8BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAEE4E80-BD32-49E2-B531-483246DC8BAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFB483E6-CE70-48C9-8137-D5D8BF4D507F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB483E6-CE70-48C9-8137-D5D8BF4D507F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB483E6-CE70-48C9-8137-D5D8BF4D507F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB483E6-CE70-48C9-8137-D5D8BF4D507F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B98D342-9541-4E86-AF70-FB471CFF0FF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B98D342-9541-4E86-AF70-FB471CFF0FF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B98D342-9541-4E86-AF70-FB471CFF0FF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B98D342-9541-4E86-AF70-FB471CFF0FF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{554575A2-2D9B-4F16-94A1-6B861CD40C74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{554575A2-2D9B-4F16-94A1-6B861CD40C74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{554575A2-2D9B-4F16-94A1-6B861CD40C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{554575A2-2D9B-4F16-94A1-6B861CD40C74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
