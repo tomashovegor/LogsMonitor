@@ -2,6 +2,6 @@
 {
     public interface ILogNumberService
     {
-        string GetLogNumber(string projectCode, int number);
+        string GetLogNumber(string prefix, int number);
     }
 }

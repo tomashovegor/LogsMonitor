@@ -4,14 +4,14 @@ namespace LogMonitor.DomainServices.Implementation
 {
     public class LogNumberService : ILogNumberService
     {
-        public string GetLogNumber(string projectCode, int number)
+        public string GetLogNumber(string prefix, int number)
         {
-            if (string.IsNullOrEmpty(projectCode))
+            if (string.IsNullOrEmpty(prefix))
             {
-                throw new ArgumentNullException(nameof(projectCode), "Передан пустой код проекта");
+                throw new ArgumentNullException(nameof(prefix), "Передан пустой префикс номера");
             }
 
-            return $"{projectCode}-{number}";
+            return $"{prefix}-{number}";
         }
     }
 }

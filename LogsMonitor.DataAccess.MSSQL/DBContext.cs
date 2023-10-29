@@ -1,6 +1,5 @@
 ﻿using LogsMonitor.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace LogsMonitor.DataAccess.MSSQL
 {
@@ -11,5 +10,6 @@ namespace LogsMonitor.DataAccess.MSSQL
 
         public DbSet<Project> Projects { get; set; }
         public DbSet<Log> Logs { get; set; }
+        public DbSet<LogNumberCounter> LogNumberCounters { get; set; }
     }
 }
