@@ -1,3 +1,7 @@
+using LogMonitor.DomainServices.Implementation.Extensions;
+using LogsMonitor.Application.Extensions;
+using LogsMonitor.DataAccess.MSSQL.Extensions;
+
 namespace LogsMonitor
 {
     public class Program
@@ -9,6 +13,13 @@ namespace LogsMonitor
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Configuration.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "Settings"));
+            builder.Configuration.AddJsonFile($"settings.connections.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", false);
+
+            builder.Services.AddDomainServicesModule()
+                            .AddMSSQLDALModule(builder.Configuration)
+                            .AddApplicationModule();
 
             var app = builder.Build();
 

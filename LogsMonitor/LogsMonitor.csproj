@@ -11,4 +11,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LogMonitor.DomainServices.Implementation\LogMonitor.DomainServices.Implementation.csproj" />
+    <ProjectReference Include="..\LogsMonitor.Application\LogsMonitor.Application.csproj" />
+    <ProjectReference Include="..\LogsMonitor.Controllers\LogsMonitor.Controllers.csproj" />
+    <ProjectReference Include="..\LogsMonitor.DataAccess.MSSQL\LogsMonitor.DataAccess.MSSQL.csproj" />
+  </ItemGroup>
+
 </Project>

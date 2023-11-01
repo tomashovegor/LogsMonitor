@@ -13,9 +13,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogsMonitor.DataAccess.MSSQ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogsMonitor.Application", "LogsMonitor.Application\LogsMonitor.Application.csproj", "{CFB483E6-CE70-48C9-8137-D5D8BF4D507F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogMonitor.DomainServices.Interfaces", "LogMonitor.DomainServices.Interfaces\LogMonitor.DomainServices.Interfaces.csproj", "{3B98D342-9541-4E86-AF70-FB471CFF0FF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogMonitor.DomainServices.Interfaces", "LogMonitor.DomainServices.Interfaces\LogMonitor.DomainServices.Interfaces.csproj", "{3B98D342-9541-4E86-AF70-FB471CFF0FF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogMonitor.DomainServices.Implementation", "LogMonitor.DomainServices.Implementation\LogMonitor.DomainServices.Implementation.csproj", "{554575A2-2D9B-4F16-94A1-6B861CD40C74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogMonitor.DomainServices.Implementation", "LogMonitor.DomainServices.Implementation\LogMonitor.DomainServices.Implementation.csproj", "{554575A2-2D9B-4F16-94A1-6B861CD40C74}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{D6958C84-2F5A-4232-A9C0-99C847BAF5F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8DB0EB46-D89B-48A2-A5E1-0EC1C6B6F3EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frameworks", "Frameworks", "{7568E352-BB6B-4FF8-9C2E-1FB2D8D32C2D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers", "{5C6C7287-A824-49B3-8347-C9BFF2C2D841}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogsMonitor.Controllers", "LogsMonitor.Controllers\LogsMonitor.Controllers.csproj", "{E977B4D1-067F-48F1-99E7-4C577EC3F2CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,9 +61,23 @@ Global
 		{554575A2-2D9B-4F16-94A1-6B861CD40C74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{554575A2-2D9B-4F16-94A1-6B861CD40C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{554575A2-2D9B-4F16-94A1-6B861CD40C74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E977B4D1-067F-48F1-99E7-4C577EC3F2CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E977B4D1-067F-48F1-99E7-4C577EC3F2CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E977B4D1-067F-48F1-99E7-4C577EC3F2CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E977B4D1-067F-48F1-99E7-4C577EC3F2CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4097C0FB-7197-4F69-8C20-62445D8F0558} = {7568E352-BB6B-4FF8-9C2E-1FB2D8D32C2D}
+		{FA6290B1-6BCC-4503-BBDF-7719378C717B} = {D6958C84-2F5A-4232-A9C0-99C847BAF5F0}
+		{F1D04FB4-2CFE-4C88-AB6A-AF7A83BF53B9} = {8DB0EB46-D89B-48A2-A5E1-0EC1C6B6F3EC}
+		{CAEE4E80-BD32-49E2-B531-483246DC8BAB} = {7568E352-BB6B-4FF8-9C2E-1FB2D8D32C2D}
+		{CFB483E6-CE70-48C9-8137-D5D8BF4D507F} = {8DB0EB46-D89B-48A2-A5E1-0EC1C6B6F3EC}
+		{3B98D342-9541-4E86-AF70-FB471CFF0FF8} = {D6958C84-2F5A-4232-A9C0-99C847BAF5F0}
+		{554575A2-2D9B-4F16-94A1-6B861CD40C74} = {D6958C84-2F5A-4232-A9C0-99C847BAF5F0}
+		{E977B4D1-067F-48F1-99E7-4C577EC3F2CC} = {5C6C7287-A824-49B3-8347-C9BFF2C2D841}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FEAD3BF7-382B-44FF-814E-348ABDB41ACF}

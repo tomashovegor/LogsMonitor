@@ -9,8 +9,7 @@ namespace LogsMonitor.Application.Queries
     public class GetLogsQuery : IRequest<IEnumerable<LogDTO>>
     {
         public Guid ProjectId { get; set; }
-        public int Skip { get; set; }
-        public int Count { get; set; }
+        public DateTime OccurrenceDate { get; set; }
     }
 
     public class GetLogsQueryHandler : IRequestHandler<GetLogsQuery, IEnumerable<LogDTO>>
@@ -25,10 +24,9 @@ namespace LogsMonitor.Application.Queries
         public Task<IEnumerable<LogDTO>> Handle(GetLogsQuery request, CancellationToken cancellationToken)
         {
             IEnumerable<Log> logs = _logRepository.GetAll()
-                                                 .Where(l => l.ProjectId == request.ProjectId)
-                                                 .Skip(request.Skip)
-                                                 .Take(request.Count)
-                                                 .AsEnumerable();
+                                                  .Where(l => l.ProjectId == request.ProjectId
+                                                           && l.OccurrenceDate.Date == request.OccurrenceDate.Date)
+                                                  .AsEnumerable();
 
             IEnumerable<LogDTO> logsDTOs = logs.Adapt<IEnumerable<LogDTO>>();
 

@@ -6,27 +6,27 @@ using MediatR;
 
 namespace LogsMonitor.Application.Queries
 {
-    public class GetLogQuery : IRequest<LogDTO>
+    public class GetLogDetailsQuery : IRequest<LogDetailsDTO>
     {
         public Guid LogId { get; set; }
     }
 
-    public class GetLogQueryHandler : IRequestHandler<GetLogQuery, LogDTO>
+    public class GetLogDetailsQueryHandler : IRequestHandler<GetLogDetailsQuery, LogDetailsDTO>
     {
         private readonly IRepository<Log> _logRepository;
 
-        public GetLogQueryHandler(IRepository<Log> logRepository)
+        public GetLogDetailsQueryHandler(IRepository<Log> logRepository)
         {
             _logRepository = logRepository;
         }
 
-        public async Task<LogDTO> Handle(GetLogQuery request, CancellationToken cancellationToken)
+        public async Task<LogDetailsDTO> Handle(GetLogDetailsQuery request, CancellationToken cancellationToken)
         {
             Log log = await _logRepository.GetById(request.LogId);
 
-            LogDTO logDTO = log.Adapt<LogDTO>();
+            LogDetailsDTO logDetailsDTO = log.Adapt<LogDetailsDTO>();
 
-            return logDTO;
+            return logDetailsDTO;
         }
     }
 }
