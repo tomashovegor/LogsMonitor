@@ -14,10 +14,15 @@ namespace LogsMonitor.DataAccess.MSSQL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Project>()
-                        .HasMany<Log>()
-                        .WithOne()
-                        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Project>(entityBuilder =>
+            {
+                entityBuilder.HasMany<Log>()
+                             .WithOne()
+                             .OnDelete(DeleteBehavior.Cascade);
+                entityBuilder.HasMany<LogNumberCounter>()
+                             .WithOne()
+                             .OnDelete(DeleteBehavior.Cascade);
+            });         
 
             modelBuilder.Entity<Log>()
                         .HasIndex(l => l.Number)
