@@ -10,9 +10,9 @@ namespace LogsMonitor.Controllers
     [Route("api/projects")]
     public class ProjectsController : ControllerBase
     {
-        private readonly Mediator _mediator;
+        private readonly IMediator _mediator;
 
-        public ProjectsController(Mediator mediator)
+        public ProjectsController(IMediator mediator)
         {
             _mediator = mediator;
         }

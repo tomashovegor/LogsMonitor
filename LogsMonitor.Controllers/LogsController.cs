@@ -9,9 +9,9 @@ namespace LogsMonitor.Controllers
     [Route("api/logs")]
     public class LogsController : ControllerBase
     {
-        private readonly Mediator _mediator;
+        private readonly IMediator _mediator;
 
-        public LogsController(Mediator mediator)
+        public LogsController(IMediator mediator)
         {
             _mediator = mediator;
         }

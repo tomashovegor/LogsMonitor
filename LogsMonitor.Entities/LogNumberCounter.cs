@@ -2,9 +2,8 @@
 
 namespace LogsMonitor.Entities
 {
-    public class LogNumberCounter : EntityBase
+    public class LogNumberCounter : CounterBase
     {
-        public int Current { get; set; }
         public string Prefix { get; set; } = null!;
         public Guid ProjectId { get; set; }
     }

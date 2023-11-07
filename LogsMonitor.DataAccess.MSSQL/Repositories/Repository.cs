@@ -1,8 +1,9 @@
 ﻿using LogsMonitor.Entities.Base;
 using LogsMonitor.Infrastructure.Interfaces.DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace LogsMonitor.DataAccess.MSSQL
+namespace LogsMonitor.DataAccess.MSSQL.Repositories
 {
     public class Repository<T> : IRepository<T> where T : EntityBase
     {
@@ -29,11 +30,13 @@ namespace LogsMonitor.DataAccess.MSSQL
             return entities;
         }
 
-        public async Task Add(T entity)
+        public async Task<Guid> Add(T entity)
         {
-            _entitySet.Add(entity);
+            EntityEntry<T> entityEntry = _entitySet.Add(entity);
 
             await _context.SaveChangesAsync();
+
+            return entityEntry.Entity.Id;
         }
 
         public async Task Update(T entity)
@@ -45,11 +48,8 @@ namespace LogsMonitor.DataAccess.MSSQL
 
         public async Task Remove(Guid entityId)
         {
-            T entity = await _entitySet.Where(e => e.Id == entityId).FirstOrDefaultAsync();
-            _entitySet.Remove(entity);
-
-            await _context.SaveChangesAsync();
+            await _entitySet.Where(e => e.Id == entityId)
+                            .ExecuteDeleteAsync();
         }
-
     }
 }

@@ -7,7 +7,6 @@ namespace LogMonitor.DomainServices.Implementation.Extensions
     {
         public static IServiceCollection AddDomainServicesModule(this IServiceCollection services)
         {
-            services.AddTransient<ILogNumberCounterService, LogNumberCounterService>();
             services.AddTransient<ILogNumberService, LogNumberService>();
 
             return services;

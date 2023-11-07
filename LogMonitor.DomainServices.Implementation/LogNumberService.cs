@@ -11,7 +11,7 @@ namespace LogMonitor.DomainServices.Implementation
                 throw new ArgumentNullException(nameof(prefix), "Передан пустой префикс номера");
             }
 
-            return $"{prefix}-{number}";
+            return $"{prefix}-{number.ToString().PadLeft(5, '0')}";
         }
     }
 }

@@ -27,6 +27,10 @@ namespace LogsMonitor.DataAccess.MSSQL
             modelBuilder.Entity<Log>()
                         .HasIndex(l => l.Number)
                         .IsUnique();
+
+            modelBuilder.Entity<LogNumberCounter>()
+                        .HasIndex(lnc => lnc.Prefix)
+                        .IsUnique();
         }
     }
 }

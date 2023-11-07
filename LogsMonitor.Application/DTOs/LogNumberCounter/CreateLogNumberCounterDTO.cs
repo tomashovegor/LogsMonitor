@@ -1,8 +1,8 @@
 ﻿namespace LogsMonitor.Application.DTOs
 {
-    public class CreateProjectDTO
+    public class CreateLogNumberCounterDTO
     {
-        public string Name { get; set; } = null!;
+        public Guid ProjectId { get; set; }
         public string Prefix { get; set; } = null!;
     }
 }

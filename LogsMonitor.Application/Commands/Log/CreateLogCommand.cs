@@ -1,5 +1,6 @@
 ﻿using LogMonitor.DomainServices.Interfaces;
 using LogsMonitor.Application.DTOs;
+using LogsMonitor.Application.Queries;
 using LogsMonitor.Entities;
 using LogsMonitor.Infrastructure.Interfaces.DataAccess;
 using Mapster;
@@ -15,30 +16,40 @@ namespace LogsMonitor.Application.Commands
     public class CreateLogCommandHandler : IRequestHandler<CreateLogCommand>
     {
         private readonly IRepository<Log> _logRepository;
-        private readonly IRepository<LogNumberCounter> _logNumberCounterRepository;
         private readonly ILogNumberService _logNumberService;
-        private readonly ILogNumberCounterService _logNumberCounterService;
+        private readonly IMediator _mediator;
 
-        public CreateLogCommandHandler(IRepository<Log> logRepository, IRepository<LogNumberCounter> logNumberCounterRepository,
-            ILogNumberCounterService logNumberCounterService, ILogNumberService logNumberService)
+        public CreateLogCommandHandler(IRepository<Log> logRepository, ILogNumberService logNumberService, IMediator mediator)
         {
             _logRepository = logRepository;
-            _logNumberCounterRepository = logNumberCounterRepository;
             _logNumberService = logNumberService;
-            _logNumberCounterService = logNumberCounterService;
+            _mediator = mediator;
         }
 
         public async Task Handle(CreateLogCommand request, CancellationToken cancellationToken)
         {
             Log log = request.CreateLogDTO.Adapt<Log>();
-            LogNumberCounter logNumberCounter = await _logNumberCounterRepository.GetById(request.CreateLogDTO.ProjectId);
-
-            _logNumberCounterService.MoveNext(logNumberCounter);
-
-            log.Number = _logNumberService.GetLogNumber(logNumberCounter.Prefix, logNumberCounter.Current);
-
-            await _logNumberCounterRepository.Update(logNumberCounter);
+            log.Number = await GetLogNumberAsync(request.CreateLogDTO.ProjectId);
+            
             await _logRepository.Add(log);
+        }
+
+        private async Task<string> GetLogNumberAsync(Guid projectId)
+        {
+            LogNumberCounterDTO logNumberCounterDTO = await _mediator.Send(new GetLogNumberCounterQuery() { ProjectId = projectId });
+
+            string logNumber = _logNumberService.GetLogNumber(logNumberCounterDTO.Prefix, logNumberCounterDTO.Current);
+
+            await _mediator.Send(new MoveNextLogNumberCounterCommand()
+            {
+                MoveNextLogNumberCounterDTO = new MoveNextLogNumberCounterDTO()
+                {
+                    Id = logNumberCounterDTO.Id,
+                    Current = logNumberCounterDTO.Current,
+                }
+            });
+
+            return logNumber;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace LogsMonitor.Infrastructure.Interfaces.DataAccess
     {
         Task<T> GetById(Guid entityId);
         IQueryable<T> GetAll();
-        Task Add(T entity);
+        Task<Guid> Add(T entity);
         Task Update(T entity);
         Task Remove(Guid entityId);
     }
