@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "MSSQLConnectionString": "Server=(localdb)\\MSSQLLocalDB;Database=LogsMonitor;Trusted_Connection=True;"
+  }
+}

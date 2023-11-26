@@ -1,6 +1,7 @@
 using LogMonitor.DomainServices.Implementation.Extensions;
 using LogsMonitor.Application.Extensions;
 using LogsMonitor.DataAccess.MSSQL.Extensions;
+using Serilog;
 
 namespace LogsMonitor
 {
@@ -10,12 +11,15 @@ namespace LogsMonitor
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Configuration.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "Settings"));
+            builder.Configuration.AddJsonFile($"settings.connections.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", false);
+            builder.Configuration.AddJsonFile($"settings.serilog.json", false);
+
+            builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
-            builder.Configuration.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "Settings"));
-            builder.Configuration.AddJsonFile($"settings.connections.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", false);
 
             builder.Services.AddDomainServicesModule()
                             .AddMSSQLDALModule(builder.Configuration)
