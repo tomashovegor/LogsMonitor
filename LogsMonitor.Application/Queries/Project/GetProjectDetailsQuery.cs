@@ -24,6 +24,11 @@ namespace LogsMonitor.Application.Queries
         {
             Project project = await _projectRepository.GetById(request.ProjectId);
 
+            if (project == null)
+            {
+                throw new NullReferenceException($"Проект с Id: {request.ProjectId} не найден");
+            }
+
             ProjectDetailsDTO projectDetailsDTO = project.Adapt<ProjectDetailsDTO>();
 
             return projectDetailsDTO;

@@ -1,6 +1,7 @@
 using LogMonitor.DomainServices.Implementation.Extensions;
 using LogsMonitor.Application.Extensions;
 using LogsMonitor.DataAccess.MSSQL.Extensions;
+using LogsMonitor.Middlewares;
 using Serilog;
 
 namespace LogsMonitor
@@ -32,6 +33,8 @@ namespace LogsMonitor
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseExceptionHandlingMiddleware();
 
             app.UseAuthorization();
 

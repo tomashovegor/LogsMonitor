@@ -6,12 +6,12 @@ using MediatR;
 
 namespace LogsMonitor.Application.Commands
 {
-    public class CreateProjectCommand : IRequest
+    public class CreateProjectCommand : IRequest<Guid>
     {
         public CreateProjectDTO CreateProjectDTO { get; set; } = null!;
     }
 
-    public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand>
+    public class CreateProjectCommandHandler : IRequestHandler<CreateProjectCommand, Guid>
     {
         private readonly IRepository<Project> _projectRepository;
         private readonly IMediator _mediator;
@@ -22,7 +22,7 @@ namespace LogsMonitor.Application.Commands
             _mediator = mediator;
         }
 
-        public async Task Handle(CreateProjectCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
         {
             Project project = request.CreateProjectDTO.Adapt<Project>();
 
@@ -36,6 +36,8 @@ namespace LogsMonitor.Application.Commands
                     Prefix = request.CreateProjectDTO.Prefix
                 }
             });
+
+            return projectId;
         }
     }
 }

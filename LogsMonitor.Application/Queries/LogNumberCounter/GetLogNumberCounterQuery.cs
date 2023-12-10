@@ -26,6 +26,11 @@ namespace LogsMonitor.Application.Queries
                                                                            .Where(lnc => lnc.ProjectId == request.ProjectId)
                                                                            .FirstOrDefault();
 
+            if (logNumberCounter == null)
+            {
+                throw new NullReferenceException($"Не найден счетчик номеров для проекта {request.ProjectId}");
+            }
+
             LogNumberCounterDTO logNumberCounterDTO = logNumberCounter.Adapt<LogNumberCounterDTO>();
 
             return Task.FromResult(logNumberCounterDTO);

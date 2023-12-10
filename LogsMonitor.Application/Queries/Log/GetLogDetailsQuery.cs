@@ -24,6 +24,11 @@ namespace LogsMonitor.Application.Queries
         {
             Log log = await _logRepository.GetById(request.LogId);
 
+            if (log == null)
+            {
+                throw new NullReferenceException($"Лог с Id: {request.LogId} не найден");
+            }
+
             LogDetailsDTO logDetailsDTO = log.Adapt<LogDetailsDTO>();
 
             return logDetailsDTO;
