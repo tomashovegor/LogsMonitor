@@ -19,6 +19,8 @@ namespace LogsMonitor.Application.Commands
         private readonly ILogNumberService _logNumberService;
         private readonly IMediator _mediator;
 
+        private static object _counterLocker;
+
         public CreateLogCommandHandler(IRepository<Log> logRepository, ILogNumberService logNumberService, IMediator mediator)
         {
             _logRepository = logRepository;
@@ -26,28 +28,38 @@ namespace LogsMonitor.Application.Commands
             _mediator = mediator;
         }
 
+        static CreateLogCommandHandler()
+        {
+            _counterLocker = new object();
+        }
+
         public async Task Handle(CreateLogCommand request, CancellationToken cancellationToken)
         {
             Log log = request.CreateLogDTO.Adapt<Log>();
-            log.Number = await GetLogNumberAsync(request.CreateLogDTO.ProjectId);
+            log.Number = GetLogNumberAsync(request.CreateLogDTO.ProjectId);
             
             await _logRepository.Add(log);
         }
 
-        private async Task<string> GetLogNumberAsync(Guid projectId)
+        private string GetLogNumberAsync(Guid projectId)
         {
-            LogNumberCounterDTO logNumberCounterDTO = await _mediator.Send(new GetLogNumberCounterQuery() { ProjectId = projectId });
+            string logNumber = null;
 
-            string logNumber = _logNumberService.GetLogNumber(logNumberCounterDTO.Prefix, logNumberCounterDTO.Current);
-
-            await _mediator.Send(new MoveNextLogNumberCounterCommand()
+            lock (_counterLocker)
             {
-                MoveNextLogNumberCounterDTO = new MoveNextLogNumberCounterDTO()
+                LogNumberCounterDTO logNumberCounterDTO = _mediator.Send(new GetLogNumberCounterQuery() { ProjectId = projectId }).Result;
+
+                logNumber = _logNumberService.GetLogNumber(logNumberCounterDTO.Prefix, logNumberCounterDTO.Current);
+
+                _mediator.Send(new MoveNextLogNumberCounterCommand()
                 {
-                    Id = logNumberCounterDTO.Id,
-                    Current = logNumberCounterDTO.Current,
-                }
-            });
+                    MoveNextLogNumberCounterDTO = new MoveNextLogNumberCounterDTO()
+                    {
+                        Id = logNumberCounterDTO.Id,
+                        Current = logNumberCounterDTO.Current,
+                    }
+                }).Wait();
+            }
 
             return logNumber;
         }

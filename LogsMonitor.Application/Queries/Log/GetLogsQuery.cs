@@ -25,8 +25,7 @@ namespace LogsMonitor.Application.Queries
         {
             IEnumerable<Log> logs = _logRepository.GetAll()
                                                   .Where(l => l.ProjectId == request.ProjectId
-                                                           && l.OccurrenceDate.Date == request.OccurrenceDate.Date)
-                                                  .AsEnumerable();
+                                                           && l.OccurrenceDate.Date == request.OccurrenceDate.Date);
 
             IEnumerable<LogDTO> logsDTOs = logs.Adapt<IEnumerable<LogDTO>>();
 

@@ -15,7 +15,7 @@ namespace LogsMonitor.DataAccess.MSSQL.Repositories
             _entitySet = context.Set<T>();
         }
 
-        public async Task MoveNext(T counter)
+        public async Task UpdateCurrentValue(T counter)
         {
             await _entitySet.Where(c => c.Id == counter.Id)
                             .ExecuteUpdateAsync(b =>

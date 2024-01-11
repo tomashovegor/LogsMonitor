@@ -4,6 +4,6 @@ namespace LogsMonitor.Infrastructure.Interfaces.DataAccess
 {
     public interface ICounterRepository<T> where T : CounterBase
     {
-        Task MoveNext(T counter);
+        Task UpdateCurrentValue(T counter);
     }
 }

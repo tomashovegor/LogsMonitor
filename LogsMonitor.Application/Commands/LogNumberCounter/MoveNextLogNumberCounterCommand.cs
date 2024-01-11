@@ -26,7 +26,7 @@ namespace LogsMonitor.Application.Commands
 
             logNumberCounter.Current++;
 
-            await _counterRepository.MoveNext(logNumberCounter);
+            await _counterRepository.UpdateCurrentValue(logNumberCounter);
         }
     }
 }

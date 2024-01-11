@@ -19,7 +19,7 @@ namespace LogsMonitor.Application.Queries
 
         public Task<IEnumerable<ProjectDTO>> Handle(GetProjectsQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<Project> projects = _projectRepository.GetAll().AsEnumerable();
+            IEnumerable<Project> projects = _projectRepository.GetAll();
 
             IEnumerable<ProjectDTO> projectsDTOs = projects.Adapt<IEnumerable<ProjectDTO>>();
 
