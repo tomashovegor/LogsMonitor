@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using LogsMonitor.Application.DTOs;
+using System.Net;
 
 namespace LogsMonitor.Middlewares
 {
@@ -29,10 +30,10 @@ namespace LogsMonitor.Middlewares
         {
             _logger.LogError($"Message: {exception.Message}{Environment.NewLine}Trace: {exception.StackTrace}");
 
-            ExceptionResponse exceptionResponse = exception switch
+            ExceptionDTO exceptionResponse = exception switch
             {
-                NullReferenceException => new ExceptionResponse(HttpStatusCode.NotFound, exception.Message),
-                _ => new ExceptionResponse(HttpStatusCode.BadRequest, exception.Message)
+                NullReferenceException => new ExceptionDTO(HttpStatusCode.NotFound, exception.Message),
+                _ => new ExceptionDTO(HttpStatusCode.BadRequest, exception.Message)
             };
 
             context.Response.ContentType = "application/json";
@@ -40,18 +41,6 @@ namespace LogsMonitor.Middlewares
 
             await context.Response.WriteAsJsonAsync(exceptionResponse);
         }
-    }
-
-    public class ExceptionResponse
-    {
-        public ExceptionResponse(HttpStatusCode statusCode, string message)
-        {
-            StatusCode = statusCode;
-            Message = message;
-        }
-
-        public HttpStatusCode StatusCode { get; set; }
-        public string Message { get; set; }
     }
 
     public static class ExceptionHandlingMiddlewareExtensions

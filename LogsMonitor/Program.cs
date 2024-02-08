@@ -2,6 +2,8 @@ using LogMonitor.DomainServices.Implementation.Extensions;
 using LogsMonitor.Application.Extensions;
 using LogsMonitor.DataAccess.MSSQL.Extensions;
 using LogsMonitor.Middlewares;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.OpenApi.Models;
 using Serilog;
 
 namespace LogsMonitor
@@ -20,7 +22,27 @@ namespace LogsMonitor
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddApiVersioning().AddVersionedApiExplorer(o =>
+            {
+                o.GroupNameFormat = "'v'VVV";
+                o.SubstituteApiVersionInUrl = true;
+            });
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Logs Monitor API",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "GitHub",
+                        Url = new Uri("https://github.com/tomashovegor/LogsMonitor")
+                    }
+                });
+
+                string apiXmlDocFilePath = Path.Combine(AppContext.BaseDirectory, "LogsMonitor.Controllers.xml");
+                options.IncludeXmlComments(apiXmlDocFilePath);
+            });
 
             builder.Services.AddDomainServicesModule()
                             .AddMSSQLDALModule(builder.Configuration)
@@ -28,11 +50,18 @@ namespace LogsMonitor
 
             var app = builder.Build();
 
-            if (app.Environment.IsDevelopment())
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+                IApiDescriptionGroupCollectionProvider groupProvider = app.Services.GetRequiredService<IApiDescriptionGroupCollectionProvider>();
+                foreach (ApiDescriptionGroup groupDescription in groupProvider.ApiDescriptionGroups.Items.OrderBy(x => x.GroupName))
+                {
+                    string url = $"/swagger/{groupDescription.GroupName}/swagger.json";
+                    string name = groupDescription.GroupName;
+
+                    options.SwaggerEndpoint(url, name);
+                }
+            });
 
             app.UseExceptionHandlingMiddleware();
 
