@@ -51,5 +51,10 @@ namespace LogsMonitor.DataAccess.MSSQL.Repositories
             await _entitySet.Where(e => e.Id == entityId)
                             .ExecuteDeleteAsync();
         }
+
+        public async Task<bool> Exists(Guid entityId)
+        {
+            return await _entitySet.AnyAsync(e => e.Id == entityId);
+        }
     }
 }

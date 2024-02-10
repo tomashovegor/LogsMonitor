@@ -22,6 +22,13 @@ namespace LogsMonitor.Application.Commands
 
         public async Task Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
         {
+            bool projectExists = await _projectRepository.Exists(request.UpdateProjectDTO.Id);
+
+            if (projectExists == false)
+            {
+                throw new NullReferenceException($"Проект с Id: {request.UpdateProjectDTO.Id} не найден");
+            }
+
             Project project = request.UpdateProjectDTO.Adapt<Project>();
 
             await _projectRepository.Update(project);

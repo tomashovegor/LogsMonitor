@@ -9,5 +9,6 @@ namespace LogsMonitor.Infrastructure.Interfaces.DataAccess
         Task<Guid> Add(T entity);
         Task Update(T entity);
         Task Remove(Guid entityId);
+        Task<bool> Exists(Guid entityId);
     }
 }
