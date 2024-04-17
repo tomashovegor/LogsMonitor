@@ -2,7 +2,7 @@
 using LogsMonitor.Infrastructure.Interfaces.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
-namespace LogsMonitor.DataAccess.MSSQL.Repositories
+namespace LogsMonitor.DataAccess.PostgreSQL.Repositories
 {
     public class CounterRepository<T> : ICounterRepository<T> where T : CounterBase
     {

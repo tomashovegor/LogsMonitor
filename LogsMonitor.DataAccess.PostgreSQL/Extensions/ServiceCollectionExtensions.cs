@@ -1,17 +1,17 @@
-﻿using LogsMonitor.DataAccess.MSSQL.Repositories;
+﻿using LogsMonitor.DataAccess.PostgreSQL.Repositories;
 using LogsMonitor.Infrastructure.Interfaces.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LogsMonitor.DataAccess.MSSQL.Extensions
+namespace LogsMonitor.DataAccess.PostgreSQL.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddMSSQLDALModule(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddPostgreSQLDALModule(this IServiceCollection services, IConfiguration configuration)
         {
-            string MSSQLConnectionString = configuration.GetConnectionString("DefaultConnectionString");
-            services.AddDbContext<DBContext>(options => options.UseSqlServer(MSSQLConnectionString));
+            string DBConnectionString = configuration.GetConnectionString("DefaultConnectionString");
+            services.AddDbContext<DBContext>(options => options.UseNpgsql(DBConnectionString));
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(ICounterRepository<>), typeof(CounterRepository<>));

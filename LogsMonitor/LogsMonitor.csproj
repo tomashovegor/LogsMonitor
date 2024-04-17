@@ -27,7 +27,7 @@
     <ProjectReference Include="..\LogMonitor.DomainServices.Implementation\LogMonitor.DomainServices.Implementation.csproj" />
     <ProjectReference Include="..\LogsMonitor.Application\LogsMonitor.Application.csproj" />
     <ProjectReference Include="..\LogsMonitor.Controllers\LogsMonitor.Controllers.csproj" />
-    <ProjectReference Include="..\LogsMonitor.DataAccess.MSSQL\LogsMonitor.DataAccess.MSSQL.csproj" />
+    <ProjectReference Include="..\LogsMonitor.DataAccess.PostgreSQL\LogsMonitor.DataAccess.PostgreSQL.csproj" />
   </ItemGroup>
 
 </Project>
