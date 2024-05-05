@@ -397,5 +397,5 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-#Settings
-**/Settings/settings.**.json
+# Environment files
+/*.env
