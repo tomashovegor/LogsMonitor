@@ -5,17 +5,17 @@
 
 ## Переменные окружения
 
-Чтобы запустить проект, нужно создать два файла в корне проекта с переменными окружения для сервисов.
+Чтобы запустить проект, нужно создать файл **.env** в корне проекта с переменными окружения для сервисов.
 
-**db.env**
+**.env**
 ```
-POSTGRES_PASSWORD={Пароль postgres пользователя}
-```
-
-**api.env**
-```
-ConnectionStrings__DefaultConnectionString=Host=db;Port=5432;Database=LogsMonitor;Username=postgres;Password={Пароль postgres пользователя}
+# api service
+API_PORT={Порт для API на вашем устройстве}
 ASPNETCORE_ENVIRONMENT={Конфигурация приложения (Development | Production)}
+CONFIGURATION={Конфигурация сборки (Debug | Release)}
+# db service
+DB_PORT={Порт для СУБД на вашем устройстве}
+POSTGRES_PASSWORD={Пароль postgres пользователя}
 ```
 
 ## Запуск
